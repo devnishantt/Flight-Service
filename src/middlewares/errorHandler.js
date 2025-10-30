@@ -19,7 +19,9 @@ const errorHandler = (err, req, res, next) => {
   });
 
   const errDetails =
-    NODE_ENV === "development" ? { name, stack, details } : undefined;
+    NODE_ENV === "development"
+      ? { name, stack, details: details || [] }
+      : undefined;
 
   return sendError(res, message, statusCode, errDetails);
 };

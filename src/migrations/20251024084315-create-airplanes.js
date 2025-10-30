@@ -12,6 +12,7 @@ export async function up(queryInterface, Sequelize) {
       type: Sequelize.STRING,
       unique: true,
       allowNull: false,
+      
     },
     capacity: {
       type: Sequelize.INTEGER,
