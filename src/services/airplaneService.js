@@ -17,8 +17,8 @@ export default class AirplaneService {
     return await this.airplaneRepository.create(data);
   }
 
-  async getAirplane(id) {
-    const airplane = await this.airplaneRepository.findById(id);
+  async getAirplane(id, options = {}) {
+    const airplane = await this.airplaneRepository.findById(id, options);
     return airplane;
   }
 
@@ -26,11 +26,11 @@ export default class AirplaneService {
     return await this.airplaneRepository.findAll(filter);
   }
 
-  async deleteAirplane(id) {
-    return await this.airplaneRepository.delete(id);
+  async deleteAirplane(id, options = {}) {
+    return await this.airplaneRepository.delete(id, options);
   }
 
-  async updateAirplane(id, data) {
-    return await this.airplaneRepository.update(id, data);
+  async updateAirplane(id, data, options = {}) {
+    return await this.airplaneRepository.update(id, data, options);
   }
 }
