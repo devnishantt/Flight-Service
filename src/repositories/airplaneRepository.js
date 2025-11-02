@@ -1,5 +1,5 @@
 import { Airplane } from "../models/index.js";
-import { BaseRepository } from "./baseRepository.js";
+import BaseRepository from "./baseRepository.js";
 
 export default class AirplaneRepository extends BaseRepository {
   constructor() {
@@ -7,6 +7,6 @@ export default class AirplaneRepository extends BaseRepository {
   }
 
   async findByModelNumber(modelNumber) {
-    return this.findOne({ modelNumber });
+    return await this.findOne({ modelNumber });
   }
 }

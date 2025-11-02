@@ -7,10 +7,13 @@ const errorHandler = (err, req, res, next) => {
   let customErr = err;
 
   if (!(err instanceof AppError)) {
-    customErr = new AppError(err.message || "Internal Server Error", 500);
+    customErr = new AppError(
+      err.message || "Internal Server Error",
+      err.statusCode || 500
+    );
   }
 
-  const { message, statusCode, details, name, stack } = customErr;
+  const { message, statusCode, details, name = "Error", stack } = customErr;
 
   logger.error(`${name || "Error"}: ${message}`, {
     statusCode,
@@ -18,10 +21,7 @@ const errorHandler = (err, req, res, next) => {
     stack,
   });
 
-  const errDetails =
-    NODE_ENV === "development"
-      ? { name, stack, details: details || [] }
-      : undefined;
+  const errDetails = NODE_ENV === "development" ? { name, stack, details } : undefined;
 
   return sendError(res, message, statusCode, errDetails);
 };

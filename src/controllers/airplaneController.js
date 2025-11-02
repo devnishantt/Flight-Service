@@ -1,8 +1,7 @@
-import logger from "../config/loggerConfig.js";
 import { AirplaneRepository } from "../repositories/index.js";
 import { AirplaneService } from "../services/index.js";
 import asyncHandler from "../utils/asyncHandler.js";
-import { sendError, sendSuccess } from "../utils/response.js";
+import { sendSuccess } from "../utils/response.js";
 
 const airplaneService = new AirplaneService(new AirplaneRepository());
 
@@ -24,12 +23,16 @@ export const getAirplanes = asyncHandler(async (req, res) => {
 export const updateAirplane = asyncHandler(async (req, res) => {
   const airplane = await airplaneService.updateAirplane(
     req.params.id,
-    req.body
+    req.body,
+    req.query
   );
   sendSuccess(res, airplane, `Airplane updated successfully`, 200);
 });
 
 export const deleteAirplane = asyncHandler(async (req, res) => {
-  const airplane = airplaneService.deleteAirplane(req.params.id, req.query);
-  sendSuccess(res, airplane, `Airplane deleted successfully`, 200);
+  await airplaneService.deleteAirplane(
+    req.params.id,
+    req.query
+  );
+  sendSuccess(res, null, `Airplane deleted successfully`, 200);
 });

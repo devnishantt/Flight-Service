@@ -1,7 +1,7 @@
 import logger from "../config/loggerConfig.js";
 import { AppError, NotFoundError } from "../utils/errors.js";
 
-export class BaseRepository {
+export default class BaseRepository {
   constructor(model) {
     if (!model) throw new Error("Model is required for BaseRepository!");
     this.model = model;
@@ -33,7 +33,12 @@ export class BaseRepository {
 
   async findAll(options = {}) {
     try {
-      const response = await this.model.findAll(options);
+      const queryOptions = options.where ? options : { where: { ...options } };
+      const response = await this.model.findAll(queryOptions);
+
+      if (!response || response.length === 0) {
+        throw new NotFoundError(`No ${this.model.name}s found!`);
+      }
 
       return response;
     } catch (error) {
@@ -44,7 +49,7 @@ export class BaseRepository {
 
   async findOne(where, options = {}) {
     try {
-      const response = await this.model.findOne({ where, ...options });
+      const response = await this.model.findOne({where: {...where}, ...options });
       return response;
     } catch (error) {
       logger.error(`Error fetching ${this.model.name}:${error.message}`);
