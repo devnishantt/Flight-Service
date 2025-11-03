@@ -1,5 +1,4 @@
 import { DataTypes, Model } from "sequelize";
-import City from "./city.js";
 import sequelize from "./sequelize.js";
 
 export default class Airport extends Model {}
@@ -33,7 +32,7 @@ Airport.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: City,
+        model: "cities",
         key: "id",
       },
     },
@@ -54,7 +53,12 @@ Airport.init(
   }
 );
 
-Airport.belongsTo(City, {
-  foreignKey: "cityId",
-  as: "city",
-});
+// Define association (using function to avoid circular dependency)
+Airport.associate = function (models) {
+  if (models.City) {
+    Airport.belongsTo(models.City, {
+      foreignKey: "cityId",
+      as: "city",
+    });
+  }
+};

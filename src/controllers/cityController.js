@@ -7,7 +7,7 @@ const cityService = new CityService(new CityRepository());
 
 export const createCity = asyncHandler(async (req, res) => {
   const city = await cityService.createCity(req.body);
-  sendSuccess(res, city, `City created successfully`, 200);
+  sendSuccess(res, city, `City created successfully`, 201);
 });
 
 export const getCity = asyncHandler(async (req, res) => {

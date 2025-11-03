@@ -8,7 +8,7 @@ import { sendError } from "../utils/response.js";
 
 export function makeValidator(parseMethod) {
   return (schema) => (req, res, next) => {
-    const result = schema.safeParse(parseMethod);
+    const result = schema.safeParse(req[parseMethod]);
     if (!result.success) {
       const errMessages =
         result.error.issues?.map((issue) => issue.message) || [];
