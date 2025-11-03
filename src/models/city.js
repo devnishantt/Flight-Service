@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "./sequelize.js";
+import Airport from "./airport.js";
 
 export default class City extends Model {}
 City.init(
@@ -14,7 +15,7 @@ City.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        is: /^[a-zA-Z ]*$/,
+        is: /^[a-zA-Z ]+$/,
         notEmpty: true,
         len: [2, 100],
       },
@@ -23,7 +24,7 @@ City.init(
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
-        is: /^[a-zA-Z\s]*$/,
+        is: /^[a-zA-Z\s]+$/,
         len: [2, 100],
       },
     },
@@ -31,7 +32,7 @@ City.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        is: /^[a-zA-Z ]*$/,
+        is: /^[a-zA-Z ]+$/,
         notEmpty: true,
         len: [2, 100],
       },
@@ -51,3 +52,10 @@ City.init(
     ],
   }
 );
+
+City.hasMany(Airport, {
+  foreignKey: "cityId",
+  as: "airports",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
+});
