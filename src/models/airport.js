@@ -1,7 +1,16 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "./sequelize.js";
 
-export default class Airport extends Model {}
+export default class Airport extends Model {
+  static associate(models) {
+    if (models.City) {
+      Airport.belongsTo(models.City, {
+        foreignKey: "cityId",
+        as: "city",
+      });
+    }
+  }
+}
 Airport.init(
   {
     id: {
@@ -52,13 +61,3 @@ Airport.init(
     indexes: [{ unique: true, fields: ["code"] }],
   }
 );
-
-// Define association (using function to avoid circular dependency)
-Airport.associate = function (models) {
-  if (models.City) {
-    Airport.belongsTo(models.City, {
-      foreignKey: "cityId",
-      as: "city",
-    });
-  }
-};

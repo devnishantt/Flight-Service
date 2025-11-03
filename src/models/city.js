@@ -1,7 +1,18 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "./sequelize.js";
 
-export default class City extends Model {}
+export default class City extends Model {
+  static associate(models) {
+    if (models.Airport) {
+      City.hasMany(models.Airport, {
+        foreignKey: "cityId",
+        as: "airports",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+    }
+  };
+}
 City.init(
   {
     id: {
@@ -51,15 +62,3 @@ City.init(
     ],
   }
 );
-
-// Define association (using function to avoid circular dependency)
-City.associate = function (models) {
-  if (models.Airport) {
-    City.hasMany(models.Airport, {
-      foreignKey: "cityId",
-      as: "airports",
-      onDelete: "CASCADE",
-      onUpdate: "CASCADE",
-    });
-  }
-};
