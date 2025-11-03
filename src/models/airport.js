@@ -24,7 +24,7 @@ Airport.init(
       allowNull: false,
       validate: {
         isUppercase: true,
-        is: /^[A-Z]{3}$/,
+        is: /^[A-Za-z]{3}$/,
         notEmpty: true,
       },
     },
