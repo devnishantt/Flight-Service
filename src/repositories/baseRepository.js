@@ -49,7 +49,10 @@ export default class BaseRepository {
 
   async findOne(where, options = {}) {
     try {
-      const response = await this.model.findOne({where: {...where}, ...options });
+      const response = await this.model.findOne({
+        where: { ...where },
+        ...options,
+      });
       return response;
     } catch (error) {
       logger.error(`Error fetching ${this.model.name}:${error.message}`);
