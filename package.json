@@ -11,7 +11,7 @@
     "migrate:undo:all": "npx sequelize db:migrate:undo:all",
     "seed": "npx sequelize db:seed:all",
     "seed:undo": "npx sequelize db:seed:undo:all",
-    "setup": "npm run db:create && npm run db:migrate && npm run db:seed",
+    "setup": "npm run create && npm run migrate && npm run seed",
     "dev": "nodemon src/index.js",
     "start": "node src/index.js"
   },
