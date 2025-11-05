@@ -32,6 +32,10 @@ export default class FlightService {
       data.totalSeats = airplane.capacity;
     }
 
+    if (data.availableSeats === undefined || data.availableSeats === null) {
+      data.availableSeats = data.totalSeats;
+    }
+
     if (data.availableSeats > data.totalSeats) {
       throw new ValidationError(`Availabe seats cannot exceed total seats`);
     }

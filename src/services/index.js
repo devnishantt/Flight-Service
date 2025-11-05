@@ -1,4 +1,6 @@
 import AirplaneService from "./airplaneService.js";
 import CityService from "./cityService.js";
+import AirportService from "./airportService.js";
+import FlightService from "./flightService.js";
 
-export { AirplaneService, CityService };
+export { AirplaneService, CityService, AirportService, FlightService };

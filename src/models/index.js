@@ -1,6 +1,6 @@
 import Airplane from "./airplane.js";
 import City from "./city.js";
 import Airport from "./airport.js";
-import Flights from "./flight.js";
+import Flight from "./flight.js";
 
-export { Airplane, City, Airport, Flights };
+export { Airplane, City, Airport, Flight };

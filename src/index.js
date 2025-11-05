@@ -9,6 +9,16 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/health", (req, res) => {
+  res
+    .status(200)
+    .json({
+      success: true,
+      message: "Server is running",
+      timestamp: new Date().toISOString(),
+    });
+});
+
 app.use("/api", apiRouter);
 
 app.use(errorHandler);

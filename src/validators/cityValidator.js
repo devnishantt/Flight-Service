@@ -4,7 +4,7 @@ export const createCitySchema = z.object({
   name: z
     .string()
     .min(2, { message: "City name must be at least 2 characters long" })
-    .max(100, { message: "City name must not exceed 100 charaters" })
+    .max(100, { message: "City name must not exceed 100 characters" })
     .regex(/^[a-zA-Z ]+$/, {
       message: "City name must contain only alphabetic characters and spaces",
     }),

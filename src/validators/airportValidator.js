@@ -13,7 +13,7 @@ export const createAirportSchema = z.object({
     .string()
     .length(3, { message: "Airport code must be exactly 3 characters" })
     .regex(/^[A-Za-z]{3}$/, {
-      message: "Airport code must be exactly 3 uppercsae letters",
+      message: "Airport code must be exactly 3 uppercase letters",
     })
     .transform((val) => val.toUpperCase()),
   cityId: z
@@ -22,7 +22,7 @@ export const createAirportSchema = z.object({
     .positive({ message: "City ID must be a positive number" }),
   address: z
     .string()
-    .max(500, { message: "Address must not excees 500 characters" })
+    .max(500, { message: "Address must not exceed 500 characters" })
     .optional(),
 });
 

@@ -13,7 +13,7 @@ airportRouter.post(
 airportRouter.get("/:id", AirportController.getAirport);
 airportRouter.get("/", AirportController.getAirports);
 airportRouter.patch(
-  "/",
+  "/:id",
   validateRequestBody(updateAirportSchema),
   AirportController.updateAirport
 );

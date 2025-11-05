@@ -1,16 +1,16 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "./sequelize.js";
 
-export default class Flights extends Model {
+export default class Flight extends Model {
   static associate(models) {
     if (models.Airplane) {
-      Flights.belongsTo(models.Airplane, {
+      Flight.belongsTo(models.Airplane, {
         foreignKey: "airplaneId",
         as: "airplane",
       });
     }
     if (models.Airport) {
-      Flights.belongsTo(models.Airport, {
+      Flight.belongsTo(models.Airport, {
         foreignKey: "departureAirportId",
         as: "departureAirport",
       });
@@ -22,7 +22,7 @@ export default class Flights extends Model {
   }
 }
 
-Flights.init(
+Flight.init(
   {
     id: {
       type: DataTypes.INTEGER,

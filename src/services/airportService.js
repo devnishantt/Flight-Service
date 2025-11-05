@@ -28,9 +28,8 @@ export default class AirportService {
     const currentAirport = await this.airportRepository.findById(id);
 
     if (data.code) {
-      const codeToCheck = data.code || currentAirport.code;
       const existingAirport = await this.airportRepository.findByCode(
-        codeToCheck
+        data.code
       );
 
       if (existingAirport && existingAirport.id !== parseInt(id)) {
@@ -38,6 +37,7 @@ export default class AirportService {
           `Airport with code ${codeToCheck} already exists`
         );
       }
+      
       if (data.cityId) {
         await this.cityRepository.findById(data.cityId);
       }

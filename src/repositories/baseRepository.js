@@ -36,11 +36,7 @@ export default class BaseRepository {
       const queryOptions = options.where ? options : { where: { ...options } };
       const response = await this.model.findAll(queryOptions);
 
-      if (!response || response.length === 0) {
-        throw new NotFoundError(`No ${this.model.name}s found!`);
-      }
-
-      return response;
+      return response || [];
     } catch (error) {
       logger.error(`Error fetching all ${this.model.name}: ${error.message}`);
       throw new AppError(`Failed to fetch ${this.model.name}`, 500, error);

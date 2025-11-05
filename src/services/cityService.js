@@ -55,6 +55,6 @@ export default class CityService {
   }
 
   async deleteCity(id, options = {}) {
-    return await this.cityRepository.delete(id);
+    return await this.cityRepository.delete(id, options);
   }
 }

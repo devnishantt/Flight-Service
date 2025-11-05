@@ -4,7 +4,9 @@ dotenv.config();
 
 export const PORT = process.env.PORT || 3000;
 export const NODE_ENV = process.env.NODE_ENV || "development";
-export const LOG_LEVEL = process.env.LOG_LEVEL 
+export const LOG_LEVEL =
+  process.env.LOG_LEVEL ||
+  (process.env.NODE_ENV === "development" ? "debug" : "info");
 
 export const dbConfig = {
   DB_HOST: process.env.DB_HOST || "localhost",
