@@ -33,3 +33,11 @@ export const deleteFlight = asyncHandler(async (req, res) => {
   await flightService.deleteFlight(req.params.id, req.query);
   sendSuccess(res, null, `Flight deleted successfully`, 200);
 });
+
+export const updateRemainingSeats = asyncHandler(async (req, res) => {
+  const flight = await flightService.updateRemainingSeats(
+    req.params.id,
+    req.body.amount
+  );
+  sendSuccess(res, flight, `Flight remaining seats updated successfully`, 200);
+});

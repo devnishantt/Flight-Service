@@ -119,4 +119,28 @@ export default class FlightService {
   async deleteFlight(id, options = {}) {
     return await this.flightRepository.delete(id, options);
   }
+
+  async updateRemainingSeats(flightId, amount) {
+    if (amount === 0) {
+      throw new ValidationError("Amount cannot be zero");
+    }
+
+    const flight = await this.flightRepository.findById(flightId);
+    
+    // Validate that decrementing won't make availableSeats negative
+    if (amount < 0 && Math.abs(amount) > flight.availableSeats) {
+      throw new ValidationError(
+        `Cannot decrement by ${Math.abs(amount)}. Available seats: ${flight.availableSeats}`
+      );
+    }
+
+    // Validate that incrementing won't exceed totalSeats
+    if (amount > 0 && flight.availableSeats + amount > flight.totalSeats) {
+      throw new ValidationError(
+        `Cannot increment by ${amount}. Would exceed total seats: ${flight.totalSeats}`
+      );
+    }
+
+    return await this.flightRepository.updateRemainingSeats(flightId, amount);
+  }
 }

@@ -168,3 +168,12 @@ export const updateFlightSchema = z
       path: ["availableSeats"],
     }
   );
+
+export const updateRemainingSeatsSchema = z.object({
+  amount: z
+    .number({ invalid_type_error: "Amount must be a number" })
+    .int({ message: "Amount must be an integer" })
+    .refine((val) => val !== 0, {
+      message: "Amount cannot be zero",
+    }),
+});
